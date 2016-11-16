@@ -1,0 +1,27 @@
+K=[1 3 -4 2 1;-2 -5 9 -2 -3;-3 -7 15 -1 -3;1 5 -5 4 -4;4 15 -12 18 13];
+message = 'My social security number is not 123-45-6789 and I was not born yesterday.';
+c = crypt(message,K)
+
+c =
+
+r,^?Ns=|?StXE*8O!)5irCgxb\U92d#~V4:A{|0(M'-69d`]N'ho}^8M'uj1'Y|<Y,)^,b>;|$S 
+
+[w,bits] = int2hamm(double(c),15,11);      % (15,11) Hamming code
+w = double(xor(w, (rand(size(w)) <= 0.01)));  % create bit errors
+crypt(char(hamm2int(w,11,bits)), round(inv(K)))
+
+ans =
+
+My social security number is not 123-45-6789 and I was not born yesterday. 
+
+
+[w,bits] = int2hamm(double(c),12,8);       % (12,8) Hamming code
+ w = double(xor(w, (rand(size(w)) <= 0.02)));  % create bit errors
+crypt(char(hamm2int(w,8,bits)),round(inv(K)));
+crypt(char(hamm2int(w,8,bits)),round(inv(K)))
+
+ans =
+
+My social UI[LXity number is n$gElc3-45-6789 and I was not born yesterday. 
+
+diary off
